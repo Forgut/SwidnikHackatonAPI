@@ -20,7 +20,8 @@ namespace SwidnikHackaton.API.Controllers
                 FreeFlowSpeed = x.FreeFlowSpeed,
                 CurrentTravelTime = x.CurrentTravelTime,
                 FreeFlowTravelTime = x.FreeFlowTravelTime,
-                MeasureDate = x.MeasureDate
+                MeasureDate = x.MeasureDate,
+                SpeedRatio = 1.00 - (double)((double)x.CurrentSpeed / (double)x.FreeFlowSpeed),
             });
             return measurements;
         }
@@ -37,8 +38,9 @@ namespace SwidnikHackaton.API.Controllers
                 FreeFlowSpeed = x.FreeFlowSpeed,
                 CurrentTravelTime = x.CurrentTravelTime,
                 FreeFlowTravelTime = x.FreeFlowTravelTime,
-                MeasureDate = x.MeasureDate
-            });
+                MeasureDate = x.MeasureDate,
+                SpeedRatio = 1.00 - (double)((double)x.CurrentSpeed / (double)x.FreeFlowSpeed),
+                });
             return measurements;
         }
 
@@ -55,6 +57,7 @@ namespace SwidnikHackaton.API.Controllers
                 .Select(x => new
                 {
                     x.Key,
+                    StreetName = x.FirstOrDefault()?.Streets.StreetName,
                     AverageCurrentSpeed = x.Average(y => y.CurrentSpeed),
                     AverageCurrentTravelTime = x.Average(y => y.CurrentTravelTime),
                     AverageFreeFlowSpeed = x.Average(y => y.FreeFlowSpeed),
@@ -79,6 +82,7 @@ namespace SwidnikHackaton.API.Controllers
                 .Select(x => new
                 {
                     x.Key,
+                    StreetName = x.FirstOrDefault()?.Streets.StreetName,
                     AverageCurrentSpeed = x.Average(y => y.CurrentSpeed),
                     AverageCurrentTravelTime = x.Average(y => y.CurrentTravelTime),
                     AverageFreeFlowSpeed = x.Average(y => y.FreeFlowSpeed),

@@ -26,5 +26,6 @@ namespace SwidnikHackaton.API.ViewModels
         public int CurrentTravelTime { get; set; }
         public int FreeFlowTravelTime { get; set; }
         public DateTime MeasureDate { get; set; }
+        public double SpeedRatio { get; set; }
     }
 }
