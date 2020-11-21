@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SwidnikHackaton.API.ViewModels;
 
 namespace SwidnikHackaton.API.Controllers
 {
@@ -13,21 +14,32 @@ namespace SwidnikHackaton.API.Controllers
         [HttpGet]
         public IEnumerable<Street> Get()
         {
-            return new List<Street>()
+            var streets = DB2.Database.Entities.Streets.ToList().Select(x => new Street()
             {
-                new Street() {StreetName = "sdadsa", Latitude = (float)123.123, Longitude = (float)123.123},
-                new Street() {StreetName = "sdadsa1", Latitude = (float)123.123, Longitude = (float)123.123},
-                new Street() {StreetName = "sdadsa2", Latitude = (float)123.123, Longitude = (float)123.123},
+                ID = x.ID,
+                StreetName = x.StreetName,
+                Latitude = x.Latitude,
+                Longitude = x.Longitude
+            });
+            return streets;
+        }
+
+        [HttpGet]
+        [Route("get/{id}")]
+        public Street Get(int id)
+        {
+            var street = DB2.Database.Entities.Streets.FirstOrDefault(x => x.ID == id);
+            return new Street()
+            {
+                ID = street.ID,
+                StreetName = street.StreetName,
+                Latitude = street.Latitude,
+                Longitude = street.Longitude
             };
         }
     }
 
-    public class Street
-    {
-        public string StreetName { get; set; }
-        public float Latitude { get; set; }
-        public float Longitude { get; set; }
-    }
+ 
 }
 
 

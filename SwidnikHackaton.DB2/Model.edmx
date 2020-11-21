@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Swidnik2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Coordinates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StreetID" Type="int" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Measurements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StreetID" Type="int" Nullable="false" />
+          <Property Name="CurrentSpeed" Type="int" Nullable="false" />
+          <Property Name="FreeFlowSpeed" Type="int" Nullable="false" />
+          <Property Name="CurrentTravelTime" Type="int" Nullable="false" />
+          <Property Name="FreeFlowTravelTime" Type="int" Nullable="false" />
+          <Property Name="MeasureDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Streets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="254" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Coordinat__Stree__7C4F7684">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="1" />
+          <End Role="Coordinates" Type="Self.Coordinates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Coordinates">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Measureme__Stree__02084FDA">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="1" />
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Measurements">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Swidnik2ModelStoreContainer">
+          <EntitySet Name="Coordinates" EntityType="Self.Coordinates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Measurements" EntityType="Self.Measurements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Streets" EntityType="Self.Streets" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Coordinat__Stree__7C4F7684" Association="Self.FK__Coordinat__Stree__7C4F7684">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="Coordinates" EntitySet="Coordinates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Measureme__Stree__02084FDA" Association="Self.FK__Measureme__Stree__02084FDA">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="Measurements" EntitySet="Measurements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Swidnik2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Coordinates">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StreetID" Type="Int32" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Streets" Relationship="Self.FK__Coordinat__Stree__7C4F7684" FromRole="Coordinates" ToRole="Streets" />
+        </EntityType>
+        <EntityType Name="Measurements">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StreetID" Type="Int32" Nullable="false" />
+          <Property Name="CurrentSpeed" Type="Int32" Nullable="false" />
+          <Property Name="FreeFlowSpeed" Type="Int32" Nullable="false" />
+          <Property Name="CurrentTravelTime" Type="Int32" Nullable="false" />
+          <Property Name="FreeFlowTravelTime" Type="Int32" Nullable="false" />
+          <Property Name="MeasureDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Streets" Relationship="Self.FK__Measureme__Stree__02084FDA" FromRole="Measurements" ToRole="Streets" />
+        </EntityType>
+        <EntityType Name="Streets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StreetName" Type="String" MaxLength="254" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Coordinates" Relationship="Self.FK__Coordinat__Stree__7C4F7684" FromRole="Streets" ToRole="Coordinates" />
+          <NavigationProperty Name="Measurements" Relationship="Self.FK__Measureme__Stree__02084FDA" FromRole="Streets" ToRole="Measurements" />
+        </EntityType>
+        <Association Name="FK__Coordinat__Stree__7C4F7684">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="1" />
+          <End Role="Coordinates" Type="Self.Coordinates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Coordinates">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Measureme__Stree__02084FDA">
+          <End Role="Streets" Type="Self.Streets" Multiplicity="1" />
+          <End Role="Measurements" Type="Self.Measurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Streets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Measurements">
+              <PropertyRef Name="StreetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Swidnik2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Coordinates" EntityType="Self.Coordinates" />
+          <EntitySet Name="Measurements" EntityType="Self.Measurements" />
+          <EntitySet Name="Streets" EntityType="Self.Streets" />
+          <AssociationSet Name="FK__Coordinat__Stree__7C4F7684" Association="Self.FK__Coordinat__Stree__7C4F7684">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="Coordinates" EntitySet="Coordinates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Measureme__Stree__02084FDA" Association="Self.FK__Measureme__Stree__02084FDA">
+            <End Role="Streets" EntitySet="Streets" />
+            <End Role="Measurements" EntitySet="Measurements" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Swidnik2ModelStoreContainer" CdmEntityContainer="Swidnik2Entities">
+          <EntitySetMapping Name="Coordinates">
+            <EntityTypeMapping TypeName="Swidnik2Model.Coordinates">
+              <MappingFragment StoreEntitySet="Coordinates">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measurements">
+            <EntityTypeMapping TypeName="Swidnik2Model.Measurements">
+              <MappingFragment StoreEntitySet="Measurements">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StreetID" ColumnName="StreetID" />
+                <ScalarProperty Name="CurrentSpeed" ColumnName="CurrentSpeed" />
+                <ScalarProperty Name="FreeFlowSpeed" ColumnName="FreeFlowSpeed" />
+                <ScalarProperty Name="CurrentTravelTime" ColumnName="CurrentTravelTime" />
+                <ScalarProperty Name="FreeFlowTravelTime" ColumnName="FreeFlowTravelTime" />
+                <ScalarProperty Name="MeasureDate" ColumnName="MeasureDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Streets">
+            <EntityTypeMapping TypeName="Swidnik2Model.Streets">
+              <MappingFragment StoreEntitySet="Streets">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

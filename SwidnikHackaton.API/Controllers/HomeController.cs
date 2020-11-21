@@ -7,9 +7,15 @@ namespace SwidnikHackaton.API.Controllers
     [Route("[controller]")]
     public class HomeController : Controller
     {
+        [HttpGet]
         public string Index()
         {
-            return "I'm Swidnik API and current time is: " + DateTime.Now;
+            var message = "I'm Swidnik API and current time is: " + DateTime.Now + "\n" +
+                "streets/\n" +
+                "coordinates/\n" +
+                "measurements/\n";
+            return message;
+
         }
     }
 }
