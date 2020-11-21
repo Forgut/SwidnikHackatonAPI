@@ -44,7 +44,7 @@ namespace SwidnikHackaton.API.Controllers
 
         [HttpGet]
         [Route("GroupedByDay/{id?}")]
-        public JsonResult GroupedByDay(int? id)
+        public JsonResult GroupedByDay(int? id, string sort)
         {
             var measurements = DB2.Database.GetAllMeasurements();
             if (id.HasValue)
@@ -58,14 +58,17 @@ namespace SwidnikHackaton.API.Controllers
                     AverageCurrentSpeed = x.Average(y => y.CurrentSpeed),
                     AverageCurrentTravelTime = x.Average(y => y.CurrentTravelTime),
                     AverageFreeFlowSpeed = x.Average(y => y.FreeFlowSpeed),
-                    AverageFreeFlowTraveltime = x.Average(y => y.FreeFlowTravelTime)
+                    AverageFreeFlowTraveltime = x.Average(y => y.FreeFlowTravelTime),
+                    SpeedRatio = 1.00 - (x.Average(y=>y.CurrentSpeed) / x.Average(y=>y.FreeFlowSpeed))
                 });
+            if (sort == "SpeedRatio")
+                result = result.OrderByDescending(x => x.SpeedRatio);
             return Json(result);
         }
 
         [HttpGet]
         [Route("GroupedByDate/{id?}")]
-        public JsonResult GroupedByDate(int? id)
+        public JsonResult GroupedByDate(int? id, string sort)
         {
             var measurements = DB2.Database.GetAllMeasurements();
             if (id.HasValue)
@@ -79,8 +82,11 @@ namespace SwidnikHackaton.API.Controllers
                     AverageCurrentSpeed = x.Average(y => y.CurrentSpeed),
                     AverageCurrentTravelTime = x.Average(y => y.CurrentTravelTime),
                     AverageFreeFlowSpeed = x.Average(y => y.FreeFlowSpeed),
-                    AverageFreeFlowTraveltime = x.Average(y => y.FreeFlowTravelTime)
+                    AverageFreeFlowTraveltime = x.Average(y => y.FreeFlowTravelTime),
+                    SpeedRatio = 1.00 - (x.Average(y => y.CurrentSpeed) / x.Average(y => y.FreeFlowSpeed))
                 });
+            if (sort == "SpeedRatio")
+                result = result.OrderByDescending(x => x.SpeedRatio);
             return Json(result);
         }
     }

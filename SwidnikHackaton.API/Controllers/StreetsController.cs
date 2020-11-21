@@ -25,7 +25,7 @@ namespace SwidnikHackaton.API.Controllers
         }
 
         [HttpGet]
-        [Route("get/{id}")]
+        [Route("{id}")]
         public Street Get(int id)
         {
             var street = DB2.Database.Entities.Streets.FirstOrDefault(x => x.ID == id);

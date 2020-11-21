@@ -13,7 +13,7 @@ namespace SwidnikHackaton.API.Controllers
             var message = "I'm Swidnik API and current time is: " + DateTime.Now + "\n" +
                 "streets/\n" +
                 "coordinates/\n" +
-                "measurements/\n";
+                "measurements/<id>\n [optional ?sort==\"SpeedRatio\" to get slowest measures first] ";
             return message;
 
         }
