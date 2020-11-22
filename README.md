@@ -7,6 +7,6 @@ Dane przechowane są w postaci - id sesji, długość i szerokość geograficzna
 Dane zapewniają pełną anonimowość użytkownika - aplikacja pobiera dane w momencie gdy użytkownik zacznie zmieniać swoje położenie - dłuższy postój oznacza koniec sesji, ponowne rozpoczęcie ruchu oznacza nową sesje. 
 
 # Endpoint
-GET /PedestriansTraffic - zwraca wszystkie zapisane punkty, sesje i czasy.
-GET /PedestriansTraffic/GetProcessedData - zwraca wszystkie zapisane punkty, pogrupowane dla id sesji. 
-POST /Insert?guid=<guid>&latitude=<latitude>&longitude=<longitude> - guid to id sesji, latitude to szerokość geograficzna, longitude to długość geograficzna.
+GET /PedestriansTraffic - zwraca wszystkie zapisane punkty, sesje i czasy.  
+GET /PedestriansTraffic/GetProcessedData - zwraca wszystkie zapisane punkty, pogrupowane dla id sesji.  
+POST /Insert?guid=<guid>&latitude=<latitude>&longitude=<longitude> - guid to id sesji, latitude to szerokość geograficzna, longitude to długość geograficzna.  
