@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="Swidnik2Model.Streets" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <AssociationConnector Association="Swidnik2Model.FK__Coordinat__Stree__7C4F7684" ManuallyRouted="false" />
         <AssociationConnector Association="Swidnik2Model.FK__Measureme__Stree__02084FDA" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Swidnik2Model.PedestrianTraffic" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

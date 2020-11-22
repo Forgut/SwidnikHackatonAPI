@@ -28,5 +28,6 @@ namespace SwidnikHackaton.DB2
         public virtual DbSet<Coordinates> Coordinates { get; set; }
         public virtual DbSet<Measurements> Measurements { get; set; }
         public virtual DbSet<Streets> Streets { get; set; }
+        public virtual DbSet<PedestrianTraffic> PedestrianTraffic { get; set; }
     }
 }

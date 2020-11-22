@@ -31,5 +31,14 @@ namespace SwidnikHackaton.DB2
         {
             return Entities.Measurements;
         }
+        public static IQueryable<PedestrianTraffic> GetAllPedestrianTraffics()
+        {
+            return Entities.PedestrianTraffic;
+        }
+        public static void Insert(PedestrianTraffic traffic)
+        {
+            Entities.PedestrianTraffic.Add(traffic);
+            Entities.SaveChanges();
+        }
     }
 }
