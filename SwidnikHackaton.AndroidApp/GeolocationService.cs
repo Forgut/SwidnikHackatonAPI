@@ -50,6 +50,11 @@ namespace SwidnikHackaton.AndroidApp
                         return;
                     if (_lastLocation != null && (DateTime.Now - _lastLocationTime).TotalMinutes >= 10)
                         _guid = Guid.NewGuid();
+                    var distance = Location.CalculateDistance(location, _lastLocation, DistanceUnits.Kilometers);
+                    var timeFromLastMeasure = (_lastLocationTime - DateTime.Now).Seconds;
+                    var speedKMpH = distance * (3600 / timeFromLastMeasure);
+                    if (timeFromLastMeasure < 60 && speedKMpH > 15) 
+                        return;
                     _lastLocation = location;
                     _lastLocationTime = DateTime.Now;
                     var result = await new HttpClient().PostAsync(_url + $"/?guid={_guid}&latitude={location.Latitude}&longitude={location.Longitude}", null);
