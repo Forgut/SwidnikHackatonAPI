@@ -1,3 +1,4 @@
+## API
 # SwidnikHackaton API
 API pozwala na pobranie danych z bazy danych postawionej w Azure. Baza wypełniana jest na bieżąco na podstawie danych z naszej własnej aplikacji mobilnej. 
 API zwraca dane w postaci JSON.
@@ -10,3 +11,9 @@ Dane zapewniają pełną anonimowość użytkownika - aplikacja pobiera dane w m
 GET /PedestriansTraffic - zwraca wszystkie zapisane punkty, sesje i czasy.  
 GET /PedestriansTraffic/GetProcessedData - zwraca wszystkie zapisane punkty, pogrupowane dla id sesji.  
 POST /Insert?guid=<guid>&latitude=<latitude>&longitude=<longitude> - guid to id sesji, latitude to szerokość geograficzna, longitude to długość geograficzna.  
+  
+ ## Aplikacja mobilna
+ Aplikacja mobilna pozwala na śledzenie lokalizacji użytkownika, i wysyła pozyskane dane do powyższego API. 
+ 
+ ## Baza danych
+ Projekt zawiera również moduł bazy danych, obecnie podłączonej do naszego środowiska dev, na platformie Azure. 
