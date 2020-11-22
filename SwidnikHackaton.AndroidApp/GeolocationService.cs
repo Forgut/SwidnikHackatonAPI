@@ -51,7 +51,7 @@ namespace SwidnikHackaton.AndroidApp
                     if (_lastLocation != null && (DateTime.Now - _lastLocationTime).TotalMinutes >= 10)
                         _guid = Guid.NewGuid();
                     var distance = Location.CalculateDistance(location, _lastLocation, DistanceUnits.Kilometers);
-                    var timeFromLastMeasure = (_lastLocationTime - DateTime.Now).Seconds;
+                    var timeFromLastMeasure = (DateTime.Now - _lastLocationTime).Seconds;
                     var speedKMpH = distance * (3600 / timeFromLastMeasure);
                     if (timeFromLastMeasure < 60 && speedKMpH > 15) 
                         return;
